@@ -1,265 +1,69 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>columbina countdown</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .music-button {
-      font-size: 30pt;
-      cursor: pointer;
-      user-select: none;
-      position: absolute;
-      top: 18vh;
-      left: 50%;
-      transform: translateX(-50%);
-      filter: none !important;
-      text-shadow: none !important;
-      box-shadow: none !important;
-      color: inherit;
-      z-index: 1001;
-    }
-
-    .nav-button {
-      font-size: 24px;
-      cursor: pointer;
-      user-select: none;
-      position: absolute;
-      top: 25vh;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #f7d3e8;
-      z-index: 1000;
-      text-shadow: 0 0 6px #f7d3e880;
-    }
-
-    .expanded-content {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 30px;
-      background-color: rgba(255,255,255,0.07);
-      padding: 20px;
-      border-radius: 20px;
-      max-width: 600px;
-    }
-
-    .expanded-content.show {
-      display: flex;
-    }
-
-    .dropdown {
-      margin: 20px 0;
-    }
-
-    .dropdown button {
-      background: none;
-      border: 1px solid #fff;
-      padding: 8px 16px;
-      font-size: 20px;
-      cursor: pointer;
-      color: white;
-      border-radius: 20px;
-    }
-
-    .dropdown-content {
-      display: none;
-      margin-top: 15px;
-      font-size: 14px;
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    .dropdown.active .dropdown-content {
-      display: block;
-    }
-
-    .generate-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 14px;
-      border: 1px solid white;
-      cursor: pointer;
-      border-radius: 15px;
-      font-size: 14px;
-    }
-
-    .countdown-options span {
-      margin: 0 5px;
-      cursor: pointer;
-      text-decoration: underline;
-      font-size: 14px;
-    }
-
-    .mini-countdown {
-      margin-top: 10px;
-      font-size: 20px;
-    }
-
-    .intro-text {
-      font-size: 14px;
-      line-height: 1.6;
-      text-align: center;
-      margin-bottom: 20px;
-      padding: 0 10px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>uixbina countdown</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="music-button" id="musicToggle">𝄞𝄢</div>
-  <div class="nav-button" onclick="toggleExpandedSection()">˚₊‧꒰ა♡໒꒱ ‧₊˚</div>
+<body class="daydream">
+  <audio id="themeMusic" src="theme.mp3" loop></audio>
+  <audio id="clickSound" src="sparkle.mp3"></audio>
 
+  <div class="music-button pulsing" id="musicToggle">𝄞𝄢</div>
   <div class="countdown-container">
     <h1>⋆｡°✩ speculated columbina release date</h1>
     <div id="countdown">
-      <div class="countdown-segment">
-        <div class="count">00</div>
-        <div class="label">days</div>
-      </div>
+      <div class="countdown-segment"><div class="count">00</div><div class="label">days</div></div>
       <div class="separator">|</div>
-      <div class="countdown-segment">
-        <div class="count">00</div>
-        <div class="label">hours</div>
-      </div>
+      <div class="countdown-segment"><div class="count">00</div><div class="label">hours</div></div>
       <div class="separator">|</div>
-      <div class="countdown-segment">
-        <div class="count">00</div>
-        <div class="label">minutes</div>
-      </div>
+      <div class="countdown-segment"><div class="count">00</div><div class="label">minutes</div></div>
       <div class="separator">|</div>
-      <div class="countdown-segment">
-        <div class="count">00</div>
-        <div class="label">seconds</div>
-      </div>
+      <div class="countdown-segment"><div class="count">00</div><div class="label">seconds</div></div>
     </div>
-    <div class="release-date">
-      ────୨ৎ────<br>
-      01/14/26<br>
-      ────୨ৎ────
-    </div>
+    <canvas id="visualizer"></canvas>
+    <div class="release-date">────୨ৎ────<br><span id="releaseText">01/14/26</span><br>────୨ৎ────</div>
   </div>
 
-  <div class="note">
-    ♡ please do keep in mind that these are just my speculations ♡<br>
-    <span class="subnote">☆ the website will be updated once there is new official information ☆</span>
-  </div>
-
-  <div class="expanded-content" id="expandedSection">
-    <div class="intro-text">
-      thank you so much for visiting this website! i’ve been super duper excited for columbina ever since the winter night lazzo trailer, and i’ve been saving up for her for over a year now! i did end up going for skirk, so part of me hopes they’ll work well together haha!<br><br>
-      i really hope bina ends up being a dps or sub-dps. honestly, i’m getting her either way, but i’d love for her to have some dps capabilities (maybe through her constellations if she turns out to be a support) ♡ i wanna see her on-field alllll the time. i mean, we’ve all been patiently waiting for her for so long, barely seeing her, so it just feels right.
-    </div>
-
-    <div class="dropdown" id="dropdown1">
-      <button onclick="toggleDropdown('dropdown1')">♡</button>
-      <div class="dropdown-content">
-        columbina mood generator<br>
-        <div class="generate-btn" onclick="generateMood()">generate</div>
-        <div id="moodResult" style="margin-top: 10px;"></div>
-      </div>
-    </div>
-
-    <div class="dropdown" id="dropdown2">
-      <button onclick="toggleDropdown('dropdown2')">☆</button>
-      <div class="dropdown-content">
-        since we really dont know when shes coming...<br>
-        <div class="countdown-options">
-          <span onclick="startMiniCountdown('2025-09-10')">6.0</span>
-          <span onclick="startMiniCountdown('2025-10-22')">6.1</span>
-          <span onclick="startMiniCountdown('2025-12-03')">6.2</span>
-          <span onclick="startMiniCountdown('2026-01-14')">6.3</span>
-          <span onclick="startMiniCountdown('2026-02-25')">6.4</span>
-          <span onclick="startMiniCountdown('2026-04-08')">6.5</span>
-          <span onclick="startMiniCountdown('2026-05-20')">6.6</span>
-        </div>
-        <div class="mini-countdown" id="miniCountdown">--</div>
-      </div>
-    </div>
-
-    <div class="dropdown" id="dropdown3">
-      <button onclick="toggleDropdown('dropdown3')">ᕱ⑅ᕱ</button>
-      <div class="dropdown-content">
-        thank you a lot for everyone giving me tips and stuff! if you have any suggestions for improvements let me know in the comments of my post haha i will def try to implement them ♡ wishing everyone good luck on saving!
+  <div class="dropdown">
+    <button class="pulsing" onclick="togglePatchSlider()">♡</button>
+    <div class="dropdown-content">
+      <div class="slider-container" id="patchSliderContainer">
+        <label class="slider-label" for="patchSlider">select patch:</label>
+        <input type="range" id="patchSlider" min="0" max="6" step="1" value="3" />
+        <div class="slider-label" id="patchLabel">patch 6.3</div>
       </div>
     </div>
   </div>
 
-  <audio id="themeMusic" src="theme.mp3" loop></audio>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const moods = [
-        "today she is ghosting us like hoyo is w info about her",
-        "vanishing from leaks",
-        "floathing thru another patch",
-        "practicing her idle for us ♡",
-        "doesnt feel like talking",
-        "humming"
-      ];
+  <div class="dropdown">
+    <button onclick="toggleTheme()">🌓</button>
+    <div class="dropdown-content">toggle daydream / nightmare mode</div>
+  </div>
 
-      const music = document.getElementById('themeMusic');
-      document.getElementById("musicToggle").addEventListener("click", function () {
-        if (music.paused) {
-          music.play().catch(() => console.log("Music play blocked."));
-        } else {
-          music.pause();
-        }
-      });
+  <div class="dropdown">
+    <button onclick="startQuiz()">🎲</button>
+    <div class="dropdown-content" id="quizContainer">
+      <div>what weapon will columbina use?</div>
+      <select id="quizWeapon"></select>
+      <div>what element will she wield?</div>
+      <select id="quizElement"></select>
+      <button onclick="generateProphecy()">reveal prophecy</button>
+      <div id="prophecyResult"></div>
+    </div>
+  </div>
 
-      window.toggleDropdown = function (id) {
-        document.getElementById(id).classList.toggle('active');
-      }
+  <div class="dropdown">
+    <button onclick="toggleWishCalc()">🌸</button>
+    <div class="dropdown-content" id="wishCalcContainer">
+      <div>primogems now: <input type="number" id="primogemsNow" value="0" /></div>
+      <div>primogems per day: <input type="number" id="primogemsPerDay" value="60" /></div>
+      <button onclick="calculateWishes()">calculate</button>
+      <div id="wishResult"></div>
+    </div>
+  </div>
 
-      window.generateMood = function () {
-        const result = moods[Math.floor(Math.random() * moods.length)];
-        document.getElementById("moodResult").textContent = result;
-      }
-
-      window.startMiniCountdown = function (dateStr) {
-        const target = new Date(dateStr + "T05:00:00");
-        function updateMiniCountdown() {
-          const now = new Date();
-          const diff = target - now;
-          if (diff <= 0) {
-            document.getElementById("miniCountdown").textContent = "it's time!";
-            return;
-          }
-          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-          const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-          const m = Math.floor((diff / (1000 * 60)) % 60);
-          const s = Math.floor((diff / 1000) % 60);
-          document.getElementById("miniCountdown").textContent = `${d}d ${h}h ${m}m ${s}s`;
-        }
-        updateMiniCountdown();
-        clearInterval(window._miniInterval);
-        window._miniInterval = setInterval(updateMiniCountdown, 1000);
-      }
-
-      window.toggleExpandedSection = function () {
-        const section = document.getElementById("expandedSection");
-        section.classList.toggle("show");
-      }
-
-      const releaseDate = new Date('2026-01-14T05:00:00');
-      function updateCountdown() {
-        const now = new Date();
-        const diff = releaseDate - now;
-        const totalSeconds = Math.max(0, Math.floor(diff / 1000));
-        const days = Math.floor(totalSeconds / (3600 * 24));
-        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        const segments = document.querySelectorAll('.count');
-        if (segments.length === 4) {
-          segments[0].textContent = days;
-          segments[1].textContent = hours.toString().padStart(2, '0');
-          segments[2].textContent = minutes.toString().padStart(2, '0');
-          segments[3].textContent = seconds.toString().padStart(2, '0');
-        }
-      }
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-    });
-  </script>
+  <div id="particles"></div>
+  <script src="script.js"></script>
 </body>
 </html>
