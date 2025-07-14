@@ -1,0 +1,81 @@
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  color: white;
+}
+
+body {
+  background: url('your-gif.gif') no-repeat center center/cover;
+}
+
+.glass {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.countdown {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.btn {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
